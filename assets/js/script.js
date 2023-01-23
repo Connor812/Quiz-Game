@@ -13,6 +13,9 @@ btn2.addEventListener("click", checkAnswer);
 btn3.addEventListener("click", checkAnswer);
 btn4.addEventListener("click", checkAnswer);
 let ranQuestion;
+let g = -1;
+let grab;
+let ranQuestionGrab;
 
 startButton.addEventListener("click", startGame);
 
@@ -26,6 +29,7 @@ function startGame() {
     questionContainerElement.classList.remove("hide");
     answerButtonsElement.classList.remove("hide");
     startTimer();
+    getRandomOrder();
     setNextQuestion();
 }
 
@@ -52,12 +56,20 @@ function startTimer() {
 // Getting the next question
 
 function setNextQuestion() {
-    let i = Math.floor(Math.random() * questions.length);
-    console.log(i);
-    console.log(questions[i]);
-    ranQuestion = questions[i];
+ 
+    // let ranQuestionGrab = [0, 1, 2, 3];
+    // ranQuestionGrab.sort((a,b) => 0.5 - Math.random());
+    // console.log(ranQuestionGrab);
+    // console.log(ranQuestionGrab[0]);
+    g++;
+    grab = ranQuestionGrab[g];
+    // console.log(g);
+    // console.log(grab);
+    ranQuestion = questions[grab];
+    
+    
     questionElement.innerText = ranQuestion.question;
-    console.log(ranQuestion.answers.length);
+
 
     let ranAnswer = [0,1,2,3];
     ranAnswer.sort((a,b) => 0.5 - Math.random());
@@ -70,13 +82,28 @@ function setNextQuestion() {
     console.log(ranQuestion.answers);
 }
 
+function getRandomOrder() {
+    ranQuestionGrab = [0, 1, 2, 3, 4];
+    ranQuestionGrab.sort((a,b) => 0.5 - Math.random());
+    console.log(ranQuestionGrab);
+} 
+
+
+
+
+
+
+
+
 function checkAnswer(event) {
    event.target.innerText;
     console.log(event.target.innerText);
 if (ranQuestion.answers[0] == event.target.innerText) {
     console.log("right text");
+    setNextQuestion();
 } else {
     console.log("wrong text");
+    setNextQuestion();
 }
 
 
@@ -129,6 +156,15 @@ const questions = [
     wrongAns1 = "35",
     wrongAns2 = "36",
     wrongAns3 = "34"
+    ]
+   },
+   {
+    question: "What is 32+32",
+    answers: [
+    tureAns = "64",
+    wrongAns1 = "67",
+    wrongAns2 = "68",
+    wrongAns3 = "60"
     ]
    }
 
