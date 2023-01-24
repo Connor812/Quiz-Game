@@ -29,7 +29,7 @@ let ranQuestionGrab;
 let total;
 let finalTime;
 
-
+// Initalize page
 
 function init() {
     g = -1;
