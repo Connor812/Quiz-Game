@@ -90,6 +90,13 @@ body {
     margin: 10px;
 }
 
+.restart-btn {
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 10px 20px;
+    margin: 10px;
+}
+
 .correct-or-wrong {
     font-size: 30px;
 }
@@ -109,6 +116,14 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.ul {
+    background-color: rgba(128, 164, 255, 0.583);
+    border: 2px solid black;
+}
+
+
+
 
 .hide {
     display: none;

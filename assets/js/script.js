@@ -9,6 +9,7 @@ const answerButtonsElement = document.getElementById("answer-buttons");
 const initals = document.getElementById("input-initials");
 const submitInitials = document.getElementById("submit-initials");
 const startButton = document.getElementById("start-btn");
+const restartButton = document.getElementById("restart-btn");
 const correctOrWrong = document.getElementById("correctOrWrong");
 
 const btn1 = document.getElementById("btn1");
@@ -20,9 +21,9 @@ btn2.addEventListener("click", checkAnswer);
 btn3.addEventListener("click", checkAnswer);
 btn4.addEventListener("click", checkAnswer);
 let timerInterval;
-let secondsLeft = 75;
+let secondsLeft;
 let ranQuestion;
-let g = -1;
+let g;
 let grab;
 let ranQuestionGrab;
 let total;
@@ -31,6 +32,9 @@ let finalTime;
 
 
 function init() {
+    g = -1;
+    secondsLeft = 75;
+    timeLeft.innerHTML = 0;
     questionElement.classList.add("question-font-size");
     questionElement.innerText = "The Coding Quiz";
     startButton.innerText = "Start";
@@ -43,6 +47,7 @@ function init() {
 
     initals.classList.add("hide");
     answerButtonsElement.classList.add("hide");
+    restartButton.classList.add("hide");
     ulAppend.classList.add("hide");
 
     goToHighscore.addEventListener("click", renderHighScores);
@@ -85,7 +90,7 @@ function startTimer() {
 
         if (secondsLeft === 0) {
             clearInterval(timerInterval);
-            enterInitials();
+            return enterInitials();
         }
 
     }, 1000)
@@ -96,6 +101,7 @@ function startTimer() {
 // Getting the next question
 
 function setNextQuestion() {
+    console.log(g);
     if (g === 4) {
         finalTime = secondsLeft;
         clearInterval(timerInterval);
@@ -158,7 +164,7 @@ function CorrectOrWrong() {
     correctOrWrong.classList.remove("hide");
     CORsecondsLeft = 3;
     let CORtimerInterval = setInterval(function () {
-        console.log(CORsecondsLeft);
+        // console.log(CORsecondsLeft);
         CORsecondsLeft--;
         // console.log(CORsecondsLeft);
 
@@ -173,6 +179,7 @@ function CorrectOrWrong() {
 // Once Quiz is finished, added your initals and save highscore
 
 function enterInitials() {
+    timeLeft.innerHTML = finalTime;
     questionElement.innerText = "Please Enter Initials To Save Highscore";
     answerButtonsElement.classList.add("hide");
     initals.classList.remove("hide");
@@ -200,13 +207,14 @@ function putToLocalStorage() {
 }
 
 function renderHighScores() {
+    startButton.classList.add("hide");
+    highScoreLink.classList.add("hide");
     let getHighScore = JSON.parse(localStorage.getItem("highScore"));
     questionElement.innerText = "HighScores";
     initals.classList.add("hide");
     welcomeQuiz.classList.add("hide");
-    startButton.innerText = "Restart";
-    startButton.addEventListener("click", init);
-    startButton.classList.remove("hide");
+    restartButton.addEventListener("click", init);
+    restartButton.classList.remove("hide");
     const ulAppend = document.getElementById("ulAppend");
     ulAppend.classList.remove("hide");
 
