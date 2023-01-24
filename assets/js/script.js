@@ -9,6 +9,8 @@ initals.classList.add("hide");
 const submitInitials = document.getElementById("submit-initials");
 const answerButtonsElement = document.getElementById("answer-buttons");
 const correctOrWrong = document.getElementById("correctOrWrong");
+const goToHighscore = document.getElementById("highscore");
+goToHighscore.addEventListener("click", renderHighScores);
 const btn1 = document.getElementById("btn1");
 const btn2 = document.getElementById("btn2");
 const btn3 = document.getElementById("btn3");
@@ -61,7 +63,7 @@ function startTimer() {
 
     }, 1000)
 
-   
+
 }
 
 // Getting the next question
@@ -71,8 +73,8 @@ function setNextQuestion() {
         finalTime = secondsLeft;
         clearInterval(timerInterval);
         return enterInitials();
-    } 
-    
+    }
+
     g++;
     grab = ranQuestionGrab[g];
     ranQuestion = questions[grab];
@@ -124,22 +126,22 @@ function checkAnswer(event) {
 let CORsecondsLeft;
 
 function CorrectOrWrong() {
-        
-        correctOrWrong.innerText = correctOrWrongText;
-        correctOrWrong.classList.remove("hide");
-        CORsecondsLeft = 3;
-        let CORtimerInterval = setInterval(function () {
-            console.log(CORsecondsLeft);
-            CORsecondsLeft--;
-            // console.log(CORsecondsLeft);
-    
-            if (CORsecondsLeft === 0) {
-               correctOrWrong.classList.add("hide");
-               clearInterval(CORtimerInterval);
-            }
-    
-        }, 1000)
-    }
+
+    correctOrWrong.innerText = correctOrWrongText;
+    correctOrWrong.classList.remove("hide");
+    CORsecondsLeft = 3;
+    let CORtimerInterval = setInterval(function () {
+        console.log(CORsecondsLeft);
+        CORsecondsLeft--;
+        // console.log(CORsecondsLeft);
+
+        if (CORsecondsLeft === 0) {
+            correctOrWrong.classList.add("hide");
+            clearInterval(CORtimerInterval);
+        }
+
+    }, 1000)
+}
 
 // Once Quiz is finished, added your initals and save highscore
 
@@ -147,27 +149,51 @@ function enterInitials() {
     questionElement.innerText = "Please Enter Initials To Save Highscore";
     answerButtonsElement.classList.add("hide");
     initals.classList.remove("hide");
-    submitInitials.addEventListener("click", function(event) {
+    submitInitials.addEventListener("click", function (event) {
         initialsValue = document.getElementById("initials").value;
         event.preventDefault();
         putToLocalStorage();
+        renderHighScores();
     })
 }
-       
-
-
 
 function putToLocalStorage() {
+
+    let allHighScore = JSON.parse(localStorage.getItem("highScore")) || [];
+
     let highScore = {
         finalTimeHS: finalTime,
         totalHS: total,
         initalsHS: initialsValue
     };
 
-localStorage.setItem("Highscore", JSON.stringify(highScore));
+    allHighScore.push(highScore);
+    localStorage.setItem("highScore", JSON.stringify(allHighScore));
 
 }
 
+function renderHighScores() {
+    let getHighScore = JSON.parse(localStorage.getItem("highScore"));
+    questionElement.innerText = "HighScores";
+    initals.classList.add("hide");
+    welcomeQuiz.classList.add("hide");
+    startButton.innerText = "Restart";
+    const ulAppend = document.getElementById("ulAppend");
+
+console.log(ulAppend + "Hello");
+    let ul = document.createElement("ul");
+    ulAppend.appendChild(ul);
+    
+        for (let i =0; i < getHighScore.length; i++ ) {
+            let showHighScore = getHighScore[i];
+
+            let li = document.createElement("li");
+            li.textContent = `Initials: ${showHighScore.initalsHS} Score: ${showHighScore.totalHS} Time: ${showHighScore.finalTimeHS}`;
+            ul.appendChild(li);
+
+        }
+
+}
 
 
 // Questions that the ranQuestions() grabs from
