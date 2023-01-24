@@ -148,7 +148,7 @@ function enterInitials() {
     answerButtonsElement.classList.add("hide");
     initals.classList.remove("hide");
     submitInitials.addEventListener("click", function(event) {
-        let initialsValue = document.getElementById("initials").value;
+        initialsValue = document.getElementById("initials").value;
         event.preventDefault();
         putToLocalStorage();
     })
