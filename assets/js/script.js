@@ -6,8 +6,9 @@ const questionElement = document.getElementById("question");
 questionElement.classList.add("question-font-size");
 const initals = document.getElementById("input-initials");
 initals.classList.add("hide");
+const submitInitials = document.getElementById("submit-initials");
 const answerButtonsElement = document.getElementById("answer-buttons");
-const correctOrWrong = document.getElementById("correctOrWrong")
+const correctOrWrong = document.getElementById("correctOrWrong");
 const btn1 = document.getElementById("btn1");
 const btn2 = document.getElementById("btn2");
 const btn3 = document.getElementById("btn3");
@@ -55,7 +56,7 @@ function startTimer() {
 
         if (secondsLeft === 0) {
             clearInterval(timerInterval);
-            gameOver();
+            enterInitials();
         }
 
     }, 1000)
@@ -70,7 +71,6 @@ function setNextQuestion() {
         finalTime = secondsLeft;
         clearInterval(timerInterval);
         return enterInitials();
-        
     } 
     
     g++;
@@ -108,14 +108,12 @@ function checkAnswer(event) {
         total++;
         correctOrWrongText = "Correct!";
         correctOrWrong.classList.add('correct');
-        
         setNextQuestion();
         CorrectOrWrong();
     } else {
         secondsLeft = secondsLeft - 5;
         correctOrWrong.classList.add('wrong');
         correctOrWrongText = "Wrong!";
-       
         setNextQuestion();
         CorrectOrWrong();
     }
@@ -146,11 +144,31 @@ function CorrectOrWrong() {
 // Once Quiz is finished, added your initals and save highscore
 
 function enterInitials() {
-    questionElement.innerText = "Please Enter Initials To Save Highscore"
+    questionElement.innerText = "Please Enter Initials To Save Highscore";
     answerButtonsElement.classList.add("hide");
     initals.classList.remove("hide");
-    
+    submitInitials.addEventListener("click", function(event) {
+        let initialsValue = document.getElementById("initials").value;
+        event.preventDefault();
+        putToLocalStorage();
+    })
 }
+       
+
+
+
+function putToLocalStorage() {
+    let highScore = {
+        finalTimeHS: finalTime,
+        totalHS: total,
+        initalsHS: initialsValue
+    };
+
+localStorage.setItem("Highscore", JSON.stringify(highScore));
+
+}
+
+
 
 // Questions that the ranQuestions() grabs from
 
