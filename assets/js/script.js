@@ -96,7 +96,7 @@ function startTimer() {
 
 function setNextQuestion() {
     console.log(g);
-    if (g === 4) {
+    if (g === 9) {
         finalTime = secondsLeft;
         clearInterval(timerInterval);
         return enterInitials();
@@ -122,7 +122,7 @@ function setNextQuestion() {
 // Randomizing the order of the questions
 
 function getRandomOrder() {
-    ranQuestionGrab = [0, 1, 2, 3, 4];
+    ranQuestionGrab = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
     ranQuestionGrab.sort((a, b) => 0.5 - Math.random());
     console.log(ranQuestionGrab);
 }
@@ -189,7 +189,7 @@ function enterInitials() {
 
 function putToLocalStorage() {
     let allHighScore = JSON.parse(localStorage.getItem("highScore")) || [];
-    // let initialsValue = document.getElementById("initials").value;
+    finalTime = 75 - finalTime;
     let highScore = {
         finalTimeHS: finalTime,
         totalHS: total,
@@ -224,7 +224,7 @@ function renderHighScores() {
             let showHighScore = getHighScore[i];
 
             let li = document.createElement("li");
-            li.textContent = `Initials: ${showHighScore.initalsHS} Score: ${showHighScore.totalHS} Time: ${showHighScore.finalTimeHS}`;
+            li.textContent = `${showHighScore.initalsHS} - Score: ${showHighScore.totalHS} Time: ${showHighScore.finalTimeHS}s`;
             ul.appendChild(li);
 
         }
@@ -277,6 +277,50 @@ const questions = [
             wrongAns2 = "68",
             wrongAns3 = "60"
         ]
+    },
+    {
+        question: "What is 64+64",
+        answers: [
+            tureAns = "128",
+            wrongAns1 = "127",
+            wrongAns2 = "129",
+            wrongAns3 = "130"
+        ]
+    },
+    {
+        question: "What is 128+128",
+        answers: [
+            tureAns = "256",
+            wrongAns1 = "257",
+            wrongAns2 = "259",
+            wrongAns3 = "260"
+        ]
+    },
+    {
+        question: "What is 3x3",
+        answers: [
+            tureAns = "9",
+            wrongAns1 = "10",
+            wrongAns2 = "21",
+            wrongAns3 = "8"
+        ]
+    },
+    {
+        question: "What is 10x10",
+        answers: [
+            tureAns = "100",
+            wrongAns1 = "90",
+            wrongAns2 = "101",
+            wrongAns3 = "99"
+        ]
+    },
+    {
+        question: "What is 100/50",
+        answers: [
+            tureAns = "2",
+            wrongAns1 = "50",
+            wrongAns2 = "20",
+            wrongAns3 = "5"
+        ]
     }
-
 ];
