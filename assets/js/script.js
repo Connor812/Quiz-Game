@@ -1,16 +1,16 @@
-const startButton = document.getElementById("start-btn");
+const goToHighscore = document.getElementById("highscore");
+const timer = document.getElementById("timer");
 let timeLeft = document.getElementById("timeLeft");
-const welcomeQuiz = document.getElementById("welcomeQuiz")
+const highScoreLink = document.getElementById("highscore");
 const questionContainerElement = document.getElementById("question-container");
 const questionElement = document.getElementById("question");
-questionElement.classList.add("question-font-size");
-const initals = document.getElementById("input-initials");
-initals.classList.add("hide");
-const submitInitials = document.getElementById("submit-initials");
+const welcomeQuiz = document.getElementById("welcomeQuiz");
 const answerButtonsElement = document.getElementById("answer-buttons");
+const initals = document.getElementById("input-initials");
+const submitInitials = document.getElementById("submit-initials");
+const startButton = document.getElementById("start-btn");
 const correctOrWrong = document.getElementById("correctOrWrong");
-const goToHighscore = document.getElementById("highscore");
-goToHighscore.addEventListener("click", renderHighScores);
+
 const btn1 = document.getElementById("btn1");
 const btn2 = document.getElementById("btn2");
 const btn3 = document.getElementById("btn3");
@@ -28,7 +28,32 @@ let ranQuestionGrab;
 let total;
 let finalTime;
 
-startButton.addEventListener("click", startGame);
+
+
+function init() {
+    questionElement.classList.add("question-font-size");
+    questionElement.innerText = "The Coding Quiz";
+    startButton.innerText = "Start";
+    timer.classList.remove("hide");
+    highScoreLink.classList.remove("hide");
+    questionElement.classList.remove("hide");
+    welcomeQuiz.classList.remove("hide");
+    startButton.classList.remove("hide");
+
+
+    initals.classList.add("hide");
+    answerButtonsElement.classList.add("hide");
+    ulAppend.classList.add("hide");
+
+    goToHighscore.addEventListener("click", renderHighScores);
+    startButton.addEventListener("click", startGame);
+}
+
+init();
+
+
+
+
 
 // Start Game Function
 
@@ -38,6 +63,8 @@ function startGame() {
     console.log("start game");
     startButton.classList.add("hide");
     welcomeQuiz.classList.add("hide");
+    highScoreLink.classList.add("hide");
+
     questionContainerElement.classList.remove("hide");
     answerButtonsElement.classList.remove("hide");
     startTimer();
@@ -178,7 +205,10 @@ function renderHighScores() {
     initals.classList.add("hide");
     welcomeQuiz.classList.add("hide");
     startButton.innerText = "Restart";
+    startButton.addEventListener("click", init);
+    startButton.classList.remove("hide");
     const ulAppend = document.getElementById("ulAppend");
+    ulAppend.classList.remove("hide");
 
 console.log(ulAppend + "Hello");
     let ul = document.createElement("ul");
@@ -192,7 +222,6 @@ console.log(ulAppend + "Hello");
             ul.appendChild(li);
 
         }
-
 }
 
 

@@ -22,8 +22,8 @@
     <!-- Input your incels -->
 
     <div class="header">
-        <div id="highscore" class="highscores">View Highscores</div>
-        <div id="timer" class="timer">Time Remaining: <span id="timeLeft" class="timeLeft"></span></div>
+        <div id="timer" class="timer hide">Time Remaining: <span id="timeLeft" class="timeLeft"></span></div>
+        <div id="highscore" class="highscores hide">View Highscores</div>
     </div>
     <div class="center">
         <div class="inline">
@@ -31,10 +31,10 @@
 
                 <div id="question-container">
 
-                    <div id="question">
+                    <div id="question" class="hide">
                         <h1>The Coding Quiz</h1>
                     </div>
-                    <div id="welcomeQuiz" class="welcomeQuiz">Welcome to the coding quiz! You have a time limit of 75
+                    <div id="welcomeQuiz" class="welcomeQuiz hide">Welcome to the coding quiz! You have a time limit of 75
                         seconds to answer the following questions. If you answer a question wrong, then 5 seconds will
                         be
                         deducted from your time. Press Start to begin!</div>
@@ -52,7 +52,7 @@
                 </div>
 
                 <div class="controls">
-                    <button id="start-btn" class="start-btn btn">Start</button>
+                    <button id="start-btn" class="start-btn btn hide">Start</button>
                 </div>
 
             </div>
