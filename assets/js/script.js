@@ -56,10 +56,6 @@ function init() {
 
 init();
 
-
-
-
-
 // Start Game Function
 
 function startGame() {
@@ -77,7 +73,6 @@ function startGame() {
     setNextQuestion();
 }
 
-
 // Set Timer Function
 
 function startTimer() {
@@ -94,7 +89,6 @@ function startTimer() {
         }
 
     }, 1000)
-
 
 }
 
@@ -185,25 +179,28 @@ function enterInitials() {
     initals.classList.remove("hide");
     submitInitials.addEventListener("click", function (event) {
         initialsValue = document.getElementById("initials").value;
+        console.log(initialsValue);
         event.preventDefault();
         putToLocalStorage();
         renderHighScores();
+        
     })
 }
 
 function putToLocalStorage() {
-
     let allHighScore = JSON.parse(localStorage.getItem("highScore")) || [];
-
+    // let initialsValue = document.getElementById("initials").value;
     let highScore = {
         finalTimeHS: finalTime,
         totalHS: total,
         initalsHS: initialsValue
     };
-
+    document.getElementById("initials").value = "";
+    if (highScore.initalsHS !== "") {
     allHighScore.push(highScore);
+    }
     localStorage.setItem("highScore", JSON.stringify(allHighScore));
-
+    
 }
 
 function renderHighScores() {
@@ -218,11 +215,12 @@ function renderHighScores() {
     const ulAppend = document.getElementById("ulAppend");
     ulAppend.classList.remove("hide");
 
-console.log(ulAppend + "Hello");
     let ul = document.createElement("ul");
+    ulAppend.innerText = "";
     ulAppend.appendChild(ul);
     
-        for (let i =0; i < getHighScore.length; i++ ) {
+        for (let i = 0; i < getHighScore.length; i++ ) {
+            console.log(getHighScore.length);
             let showHighScore = getHighScore[i];
 
             let li = document.createElement("li");
@@ -231,7 +229,6 @@ console.log(ulAppend + "Hello");
 
         }
 }
-
 
 // Questions that the ranQuestions() grabs from
 
