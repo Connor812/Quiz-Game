@@ -12,8 +12,6 @@ body {
     height: 100vh;
 }
 
-
-
 .header {
     display: flex;
     justify-content: space-between;
@@ -43,9 +41,13 @@ body {
     box-shadow: 0 0 10px 2px;
 }
 
+.question-font-size {
+    font-size: 32px;
+}
 
-
-
+.welcomeQuiz {
+    margin-bottom: 10px;
+}
 
 .btn-grid {
     display: grid;
@@ -56,15 +58,29 @@ body {
 
 .btn {
     background-color: rgb(90, 144, 243);
-    border: 2px solid black;
+    border: 3px solid black;
     font-size: 18px;
     border-radius: 5px;
     padding: 5px 10px;
-    transition-duration: 0.2s;
 }
 
 .btn:hover {
-    border: 3px solid blue;
+    border-color: blue;
+    background-color: rgb(132, 167, 233)
+}
+
+.input-initials {
+    display: grid;
+    justify-content: center;
+}
+
+.initials {
+    width: 100%;
+    border: 2px solid black;
+    padding: 5px;
+    background-color: rgba(128, 164, 255, 0.583);
+    font-size: 20px;
+    margin: 15px 0px 15px 0px;
 }
 
 .start-btn {

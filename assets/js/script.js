@@ -3,6 +3,9 @@ let timeLeft = document.getElementById("timeLeft");
 const welcomeQuiz = document.getElementById("welcomeQuiz")
 const questionContainerElement = document.getElementById("question-container");
 const questionElement = document.getElementById("question");
+questionElement.classList.add("question-font-size");
+const initals = document.getElementById("input-initials");
+initals.classList.add("hide");
 const answerButtonsElement = document.getElementById("answer-buttons");
 const correctOrWrong = document.getElementById("correctOrWrong")
 const btn1 = document.getElementById("btn1");
@@ -28,6 +31,7 @@ startButton.addEventListener("click", startGame);
 
 function startGame() {
     total = 0;
+    finalTime = 0;
     console.log("start game");
     startButton.classList.add("hide");
     welcomeQuiz.classList.add("hide");
@@ -65,8 +69,9 @@ function setNextQuestion() {
     if (g === 4) {
         finalTime = secondsLeft;
         clearInterval(timerInterval);
-        enterInitials();
-    }
+        return enterInitials();
+        
+    } 
     
     g++;
     grab = ranQuestionGrab[g];
@@ -103,28 +108,32 @@ function checkAnswer(event) {
         total++;
         correctOrWrongText = "Correct!";
         correctOrWrong.classList.add('correct');
-        // console.log("right text");
-        CorrectOrWrong();
+        
         setNextQuestion();
+        CorrectOrWrong();
     } else {
         secondsLeft = secondsLeft - 5;
         correctOrWrong.classList.add('wrong');
         correctOrWrongText = "Wrong!";
-        CorrectOrWrong();
-        // console.log("wrong text");
+       
         setNextQuestion();
+        CorrectOrWrong();
     }
 }
+
+// Display Correct or Wrong under Container for 3 seconds
+
+let CORsecondsLeft;
 
 function CorrectOrWrong() {
         
         correctOrWrong.innerText = correctOrWrongText;
         correctOrWrong.classList.remove("hide");
-        let CORsecondsLeft = 3;
+        CORsecondsLeft = 3;
         let CORtimerInterval = setInterval(function () {
+            console.log(CORsecondsLeft);
             CORsecondsLeft--;
             // console.log(CORsecondsLeft);
-            
     
             if (CORsecondsLeft === 0) {
                correctOrWrong.classList.add("hide");
@@ -134,25 +143,16 @@ function CorrectOrWrong() {
         }, 1000)
     }
 
+// Once Quiz is finished, added your initals and save highscore
+
 function enterInitials() {
+    questionElement.innerText = "Please Enter Initials To Save Highscore"
+    answerButtonsElement.classList.add("hide");
+    initals.classList.remove("hide");
     
 }
 
-
-
-
-function gameOver() {
-    alert("gaveover");
-    
-}
-
-
-
-
-
-
-
-
+// Questions that the ranQuestions() grabs from
 
 const questions = [
     {
